@@ -1,6 +1,7 @@
 const express = require("express");
 const fs = require("fs");
 const mongoose = require("mongoose");
+var bodyParser = require("body-parser");
 const { save } = require("./models/articleModel");
 
 const app = express();
@@ -34,7 +35,8 @@ app.set("view engine", "ejs");
 
 // Serve Static files
 app.use(express.static("public"));
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get("/", (req, res) => {
   res.render("articles/index", {
@@ -47,6 +49,10 @@ app.get("/article/create", (req, res) => {
 });
 
 app.post("/article/create", async (req, res) => {
-  const result = await save(req.body);
-  res.redirect("/");
+  try {
+    const result = await save(req.body);
+    res.json({ redirect: "/" });
+  } catch (error) {
+    console.log(error);
+  }
 });

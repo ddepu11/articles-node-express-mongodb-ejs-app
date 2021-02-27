@@ -7,6 +7,10 @@ const form = document.querySelector("form"),
   relatedToMsg = document.getElementById("relatedToMsg"),
   bodyMsg = document.getElementById("bodyMsg");
 
+let titleErrFlag,
+  bodyErrFlag,
+  relatedToErrFlag = false;
+
 //Event Listenerts
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -16,29 +20,69 @@ form.addEventListener("submit", (e) => {
   const body = bodyEl.value.trim();
 
   validateTheForm(title, relatedTo, body);
-  console.log(body.length);
+
+  if (
+    titleErrFlag === false &&
+    bodyErrFlag === false &&
+    relatedToErrFlag === false
+  ) {
+    // console.log(titleErrFlag, bodyErrFlag, relatedToErrFlag);
+    createArticleRequest(title, relatedTo, body);
+  }
 });
 
+// Post Request to create an article
+async function createArticleRequest(title, relatedTo, body) {
+  console.log("Sending pot request");
+
+  const article = JSON.stringify({ title, relatedTo, body });
+  try {
+    const res = await fetch("/article/create", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: article,
+    });
+
+    const data = await res.json();
+    window.location.href = data.redirect;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+// Validating Form
 function validateTheForm(title, relatedTo, body) {
   if (title === null || title === "") {
     showErrorMsg("Title can't be empty", titleMsg);
+    titleErrFlag = true;
   } else if (title.length < 5) {
     showErrorMsg("Title's length's should be at least 10 ", titleMsg);
+    titleErrFlag = true;
+  } else {
+    titleErrFlag = false;
   }
 
   if (relatedTo === null || relatedTo === "") {
     showErrorMsg("Related to can't be empty", relatedToMsg);
+    relatedToErrFlag = true;
   } else if (relatedTo.length > 20 || relatedTo.length < 2) {
     showErrorMsg(
       "Related to length cant't be less then 2 and greter then 20 ",
       relatedToMsg
     );
+    relatedToErrFlag = true;
+  } else {
+    relatedToErrFlag = false;
   }
 
   if (body === null || body === "") {
     showErrorMsg("Body can't be empty", bodyMsg);
+    bodyErrFlag = true;
   } else if (body.length < 50) {
     showErrorMsg("Body's length should be at least 50", bodyMsg);
+    bodyErrFlag = true;
+  } else {
+    bodyErrFlag = false;
   }
 }
 
@@ -60,5 +104,3 @@ inputEl.forEach((input) => {
 bodyEl.addEventListener("input", () => {
   bodyMsg.classList.remove("error");
 });
-
-//  action="/article/create"
