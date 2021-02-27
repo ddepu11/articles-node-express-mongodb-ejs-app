@@ -20,9 +20,9 @@ async function connectToDB() {
       useFindAndModify: false,
       useCreateIndex: true,
     });
-    // console.log("Contected To DB");
+    console.log("Contected To DB");
     app.listen(PORT, HOSTNAME, () => {
-      // console.log(`Server is up and running on http://${HOSTNAME}:${PORT}`);
+      console.log(`Server is up and running on http://${HOSTNAME}:${PORT}`);
     });
   } catch (error) {
     console.log(error);

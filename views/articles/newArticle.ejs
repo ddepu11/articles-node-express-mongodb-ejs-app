@@ -7,7 +7,7 @@
     <main class="hero">
       <div class="container">
         <h2>Add a new article</h2>
-        <form action="/article/create" method="POST">
+        <form>
           <div class="form-control">
             <label for="title">Title</label>
             <input
@@ -16,25 +16,30 @@
               name="title"
               placeholder="Title of your Article"
             />
+            <span class="msg" id="titleMsg">msg</span>
           </div>
 
           <div class="form-control">
-            <label for="related">Related to</label>
+            <label for="relatedTo">Related to</label>
             <input
               type="text"
-              id="related"
+              id="relatedTo"
               name="relatedTo"
               placeholder="In One Word"
             />
+            <span class="msg" id="relatedToMsg">msg</span>
           </div>
 
           <div class="form-control">
             <label for="body">Body</label>
             <textarea type="body" id="body" name="body" rows="7"> </textarea>
+            <span id="bodyMsg" class="msg">msg</span>
           </div>
+
           <button type="submit">Submit</button>
         </form>
       </div>
     </main>
+    <script src="/js/index.js"></script>
   </body>
 </html>

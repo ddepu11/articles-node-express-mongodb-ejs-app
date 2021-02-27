@@ -42,17 +42,14 @@ nav .container {
 
 .nav-links ul li {
   padding: 30px 20px 0px 20px;
-  border-left: 1px solid #ffffff;
 }
-nav {
-  border-bottom: 1px solid #ffffff;
-}
+
 .nav-links ul li a {
   font-size: 1.2em;
   color: #ffffff;
 }
 .nav-links ul li:hover {
-  border-bottom: 3px solid green;
+  /* border-bottom: 3px solid green; */
 }
 
 .nav-right {
