@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../partials/head.ejs") %>
+  <body>
+    <%- include("../partials/nav.ejs")%>
+
+    <main class="hero">
+      <div class="container">
+        <h2>Add a new article</h2>
+        <form action="" method="POST">
+          <div class="form-control">
+            <label for="title">Title</label>
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Title of your Article"
+            />
+          </div>
+
+          <div class="form-control">
+            <label for="related">Related to</label>
+            <input
+              type="text"
+              id="related"
+              name="related"
+              placeholder="In One Word"
+            />
+          </div>
+
+          <div class="form-control">
+            <label for="body">Body</label>
+            <textarea type="body" id="body" name="body" rows="7"> </textarea>
+          </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </main>
+  </body>
+</html>

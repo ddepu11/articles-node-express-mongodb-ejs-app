@@ -1,0 +1,52 @@
+.container h2 {
+  font-size: 3em;
+  color: white;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+form {
+  margin-top: 1.2rem;
+}
+.form-control {
+  margin-bottom: 20px;
+}
+.form-control label {
+  display: block;
+  font-size: 2.2em;
+  color: white;
+  margin-bottom: 5px;
+}
+.form-control input {
+  width: 45%;
+  font-size: 1.5em;
+  border: 0;
+  padding: 10px 5px;
+  color: #555;
+}
+.form-control textarea {
+  width: 45%;
+  border: 0;
+  font-size: 1.5em;
+  color: #555;
+  padding: 0;
+}
+.form-control input:focus,
+textarea,
+button[type="submit"]:focus {
+  outline: none;
+}
+button[type="submit"]:hover {
+  cursor: pointer;
+  transform: scale(0.97);
+}
+button[type="submit"] {
+  width: 45%;
+  font-size: 2em;
+  color: white;
+  padding: 10px 20px;
+  margin-top: 10px;
+  background: linear-gradient(to right, #00f260, #0575e6);
+  border: 0;
+  transition: transform 0.2s ease-in-out;
+}
