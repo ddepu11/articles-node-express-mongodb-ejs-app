@@ -6,7 +6,7 @@ const articleSchema = new Schema(
     title: { type: String, required: true },
     relatedTo: { type: String, required: true },
     body: { type: String, required: true },
-    // popularity: { type: Number },
+    views: { type: Number, default: 0 },
   },
   { timestamps: true }
 );
@@ -33,8 +33,17 @@ async function getAll() {
     console.log(error);
   }
 }
+async function get(id) {
+  try {
+    return (article = await Article.findById(id));
+    
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 module.exports = {
   save,
   getAll,
+  get,
 };

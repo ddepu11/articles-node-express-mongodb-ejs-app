@@ -36,20 +36,24 @@
           <h2>Recent Articles</h2>
 
           <div class="articles-div">
-            <% articles.forEach(article => {%> <% const time =new
+            <% articles.forEach(async (article) => {%> <% const time =new
             Date(article.createdAt).toLocaleString("gu-IN", { hour: "numeric",
             minute: "numeric", hour12: true, }); const date = new
             Date(article.createdAt); const d = date.getDate() ;const m =
             date.getMonth();const y = date.getFullYear(); %>
-            <div class="r-article card">
-              <img src="https://source.unsplash.com/random" alt="" />
-              <div class="r-article-info">
-                <a href=""><%=article.relatedTo%></a>
-                <span><%= `${d}-${m}-${y} ${time}` %></span>
-                <p><%= article.title %></p>
+            <a href="/article/<%=article._id%>">
+              <div class="r-article card" data-id="<%=article._id %>">
+                <img
+                  src="<%= `https://source.unsplash.com/random/30${Math.floor(Math.random()*15)}*30${Math.floor(Math.random()*9)}`  %>"
+                />
+
+                <div class="r-article-info">
+                  <p href=""><%=article.relatedTo%></p>
+                  <span><%= `${d}-${m}-${y} ${time}` %></span>
+                  <p><%= article.title %></p>
+                </div>
               </div>
-              &nbsp;
-            </div>
+            </a>
             <%}); %>
 
             <!-- Sample Article -->
@@ -66,5 +70,6 @@
         </section>
       </div>
     </main>
+    <script src="/js/index.js"></script>
   </body>
 </html>

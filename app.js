@@ -2,7 +2,8 @@ const express = require("express");
 const fs = require("fs");
 const mongoose = require("mongoose");
 var bodyParser = require("body-parser");
-const { save, getAll } = require("./models/articleModel");
+const fetch = require("node-fetch");
+const { save, getAll, get } = require("./models/articleModel");
 
 const app = express();
 
@@ -41,20 +42,29 @@ app.use(bodyParser.json());
 app.get("/", async (req, res) => {
   try {
     const articles = await getAll();
-    console.log(
-      new Date(articles[4].createdAt).toLocaleString("gu-IN", {
-        hour: "numeric",
-        minute: "numeric",
-        hour12: true,
-      })
-    );
   } catch (error) {
     console.log(error);
   }
+
   res.render("articles/index", {
     title: "Home",
     articles,
   });
+});
+
+app.get("/article/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    const article = await get(id);
+    if (article) {
+      res.render("articles/details", {
+        article,
+        title: article.relatedTo,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.get("/article/create", (req, res) => {
