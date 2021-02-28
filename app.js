@@ -2,7 +2,7 @@ const express = require("express");
 const fs = require("fs");
 const mongoose = require("mongoose");
 var bodyParser = require("body-parser");
-const { save } = require("./models/articleModel");
+const { save, getAll } = require("./models/articleModel");
 
 const app = express();
 
@@ -38,9 +38,22 @@ app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
+  try {
+    const articles = await getAll();
+    console.log(
+      new Date(articles[4].createdAt).toLocaleString("gu-IN", {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      })
+    );
+  } catch (error) {
+    console.log(error);
+  }
   res.render("articles/index", {
     title: "Home",
+    articles,
   });
 });
 
@@ -50,7 +63,7 @@ app.get("/article/create", (req, res) => {
 
 app.post("/article/create", async (req, res) => {
   try {
-    // const result = await save(req.body);
+    const result = await save(req.body);
     res.json({ ok: true, redirect: "/" });
   } catch (error) {
     res.json({ ok: false, msg: error._message });

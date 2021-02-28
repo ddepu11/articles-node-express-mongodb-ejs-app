@@ -12,26 +12,6 @@ let titleErrFlag,
   bodyErrFlag,
   relatedToErrFlag = false;
 
-//Event Listenerts
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const title = titleEl.value.trim();
-  const relatedTo = relatedToEl.value.trim();
-  const body = bodyEl.value.trim();
-
-  validateTheForm(title, relatedTo, body);
-
-  if (
-    titleErrFlag === false &&
-    bodyErrFlag === false &&
-    relatedToErrFlag === false
-  ) {
-    // console.log(titleErrFlag, bodyErrFlag, relatedToErrFlag);
-    createArticleRequest(title, relatedTo, body);
-  }
-});
-
 // Post Request to create an article
 async function createArticleRequest(title, relatedTo, body) {
   const article = JSON.stringify({ title, relatedTo, body });
@@ -45,10 +25,10 @@ async function createArticleRequest(title, relatedTo, body) {
     const { ok, redirect, msg } = await res.json();
 
     if (ok) {
-      showErrorMsg("Successfully added an article", responseMsgEl, "success");
+      showMsg("Successfully added an article", responseMsgEl, "success");
       setInterval(() => (window.location.href = redirect), 3000);
     } else {
-      showErrorMsg(`An Error Occured: ${msg.trim()}`, responseMsgEl, "error");
+      showMsg(`An Error Occured: ${msg.trim()}`, responseMsgEl, "error");
       setInterval(() => {
         responseMsgEl.innerText = ``;
       }, 5000);
@@ -61,20 +41,20 @@ async function createArticleRequest(title, relatedTo, body) {
 // Validating Form
 function validateTheForm(title, relatedTo, body) {
   if (title === null || title === "") {
-    showErrorMsg("Title can't be empty", titleMsg);
+    showMsg("Title can't be empty", titleMsg);
     titleErrFlag = true;
   } else if (title.length < 5) {
-    showErrorMsg("Title's length's should be at least 10 ", titleMsg);
+    showMsg("Title's length's should be at least 10 ", titleMsg);
     titleErrFlag = true;
   } else {
     titleErrFlag = false;
   }
 
   if (relatedTo === null || relatedTo === "") {
-    showErrorMsg("Related to can't be empty", relatedToMsg);
+    showMsg("Related to can't be empty", relatedToMsg);
     relatedToErrFlag = true;
   } else if (relatedTo.length > 20 || relatedTo.length < 2) {
-    showErrorMsg(
+    showMsg(
       "Related to length cant't be less then 2 and greter then 20 ",
       relatedToMsg
     );
@@ -84,10 +64,10 @@ function validateTheForm(title, relatedTo, body) {
   }
 
   if (body === null || body === "") {
-    showErrorMsg("Body can't be empty", bodyMsg);
+    showMsg("Body can't be empty", bodyMsg);
     bodyErrFlag = true;
   } else if (body.length < 50) {
-    showErrorMsg("Body's length should be at least 50", bodyMsg);
+    showMsg("Body's length should be at least 50", bodyMsg);
     bodyErrFlag = true;
   } else {
     bodyErrFlag = false;
@@ -95,7 +75,7 @@ function validateTheForm(title, relatedTo, body) {
 }
 
 //Show errors function
-function showErrorMsg(msg, el, classToAdd = "error") {
+function showMsg(msg, el, classToAdd = "error") {
   el.innerText = msg;
   el.classList.add(classToAdd);
 }
@@ -112,4 +92,23 @@ inputEl.forEach((input) => {
 // Same as above
 bodyEl.addEventListener("input", () => {
   bodyMsg.classList.remove("error");
+});
+
+//Event Listenerts
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const title = titleEl.value.trim();
+  const relatedTo = relatedToEl.value.trim();
+  const body = bodyEl.value.trim();
+
+  validateTheForm(title, relatedTo, body);
+
+  if (
+    titleErrFlag === false &&
+    bodyErrFlag === false &&
+    relatedToErrFlag === false
+  ) {
+    createArticleRequest(title, relatedTo, body);
+  }
 });
