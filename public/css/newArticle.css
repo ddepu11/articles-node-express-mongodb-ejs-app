@@ -6,14 +6,14 @@
 }
 
 form {
-  margin-top: 1.2rem;
+  margin-top: 0.1rem;
 }
 .form-control {
-  margin-bottom: 20px;
+  /* margin-bottom: 0px; */
 }
 .form-control label {
   display: block;
-  font-size: 2.2em;
+  font-size: 1.8em;
   color: white;
   margin-bottom: 5px;
 }
@@ -36,10 +36,12 @@ textarea,
 button[type="submit"]:focus {
   outline: none;
 }
+
 button[type="submit"]:hover {
   cursor: pointer;
   transform: scale(0.97);
 }
+
 button[type="submit"] {
   width: 45%;
   font-size: 2em;
@@ -60,9 +62,16 @@ button[type="submit"] {
   transform: translateX(-100%);
 }
 .success {
-  color: green;
+  color: #043d04;
 }
 .error {
-  color: rgb(122, 1, 1);
+  color: #7a0101;
   transform: translateX(0%) !important;
+}
+
+.message {
+  font-size: 1.2em;
+  font-weight: bold;
+  letter-spacing: 2px;
+  transition: transform 0.4s ease-in-out;
 }

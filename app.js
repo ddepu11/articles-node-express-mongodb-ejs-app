@@ -50,9 +50,10 @@ app.get("/article/create", (req, res) => {
 
 app.post("/article/create", async (req, res) => {
   try {
-    const result = await save(req.body);
-    res.json({ redirect: "/" });
+    // const result = await save(req.body);
+    res.json({ ok: true, redirect: "/" });
   } catch (error) {
+    res.json({ ok: false, msg: error._message });
     console.log(error);
   }
 });

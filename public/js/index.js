@@ -5,7 +5,8 @@ const form = document.querySelector("form"),
   inputEl = document.querySelectorAll("input"),
   titleMsg = document.getElementById("titleMsg"),
   relatedToMsg = document.getElementById("relatedToMsg"),
-  bodyMsg = document.getElementById("bodyMsg");
+  bodyMsg = document.getElementById("bodyMsg"),
+  responseMsgEl = document.querySelector(".message");
 
 let titleErrFlag,
   bodyErrFlag,
@@ -33,8 +34,6 @@ form.addEventListener("submit", (e) => {
 
 // Post Request to create an article
 async function createArticleRequest(title, relatedTo, body) {
-  console.log("Sending pot request");
-
   const article = JSON.stringify({ title, relatedTo, body });
   try {
     const res = await fetch("/article/create", {
@@ -43,8 +42,17 @@ async function createArticleRequest(title, relatedTo, body) {
       body: article,
     });
 
-    const data = await res.json();
-    window.location.href = data.redirect;
+    const { ok, redirect, msg } = await res.json();
+
+    if (ok) {
+      showErrorMsg("Successfully added an article", responseMsgEl, "success");
+      setInterval(() => (window.location.href = redirect), 3000);
+    } else {
+      showErrorMsg(`An Error Occured: ${msg.trim()}`, responseMsgEl, "error");
+      setInterval(() => {
+        responseMsgEl.innerText = ``;
+      }, 5000);
+    }
   } catch (error) {
     console.log(error);
   }
@@ -87,9 +95,9 @@ function validateTheForm(title, relatedTo, body) {
 }
 
 //Show errors function
-function showErrorMsg(msg, el) {
+function showErrorMsg(msg, el, classToAdd = "error") {
   el.innerText = msg;
-  el.classList.add("error");
+  el.classList.add(classToAdd);
 }
 
 // Remove error msg when you type
@@ -100,6 +108,7 @@ inputEl.forEach((input) => {
     span.classList.remove("error");
   });
 });
+
 // Same as above
 bodyEl.addEventListener("input", () => {
   bodyMsg.classList.remove("error");
