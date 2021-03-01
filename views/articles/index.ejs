@@ -43,6 +43,9 @@
             date.getMonth();const y = date.getFullYear(); %>
             <a href="/article/<%=article._id%>">
               <div class="r-article card" data-id="<%=article._id %>">
+                <button class="delete-btn" data-id="<%= article._id %> ">
+                  Delete
+                </button>
                 <img
                   src="<%= `https://source.unsplash.com/random/30${Math.floor(Math.random()*15)}*30${Math.floor(Math.random()*9)}`  %>"
                 />

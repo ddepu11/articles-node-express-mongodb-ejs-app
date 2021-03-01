@@ -3,7 +3,7 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 const fetch = require("node-fetch");
-const { save, getAll, get } = require("./models/articleModel");
+const { save, getAll, get, deleteOne } = require("./models/articleModel");
 
 const app = express();
 
@@ -78,5 +78,22 @@ app.post("/article/create", async (req, res) => {
   } catch (error) {
     res.json({ ok: false, msg: error._message });
     console.log(error);
+  }
+});
+
+app.delete("/article/delete/:id", async (req, res) => {
+  const id = req.params.id.trim();
+
+  try {
+    const response = await deleteOne(id);
+
+    if (response) {
+      res.json({ ok: true, redirect: "/" });
+    } else {
+      res.json({ ok: false });
+    }
+  } catch (error) {
+    console.log(error);
+    res.statuc(404).json({ ok: false });
   }
 });

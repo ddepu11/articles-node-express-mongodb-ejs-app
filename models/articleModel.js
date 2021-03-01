@@ -33,17 +33,25 @@ async function getAll() {
     console.log(error);
   }
 }
+
 async function get(id) {
   try {
-    return (article = await Article.findById(id));
-    
+    const article = await Article.findByIdAndUpdate(id);
+    return article;
   } catch (error) {
     console.log(error);
   }
 }
-
+async function deleteOne(id) {
+  try {
+    return await Article.findByIdAndDelete(id);
+  } catch (error) {
+    console.log(error);
+  }
+}
 module.exports = {
   save,
   getAll,
   get,
+  deleteOne,
 };
