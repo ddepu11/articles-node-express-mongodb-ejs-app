@@ -52,6 +52,10 @@ app.get("/", async (req, res) => {
   });
 });
 
+app.get("/article/create", (req, res) => {
+  res.render("articles/newArticle", { title: "New Article" });
+});
+
 app.get("/article/:id", async (req, res) => {
   const id = req.params.id;
   try {
@@ -65,10 +69,6 @@ app.get("/article/:id", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-});
-
-app.get("/article/create", (req, res) => {
-  res.render("articles/newArticle", { title: "New Article" });
 });
 
 app.post("/article/create", async (req, res) => {

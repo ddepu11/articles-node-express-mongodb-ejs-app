@@ -1,12 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%=title%></title>
-  </head>
+  <%- include("../partials/head.ejs") %>
+
   <body>
-    <h1><%=article.body %></h1>
+    <!-- Navbar -->
+    <%- include("../partials/nav.ejs")%>
+
+    <main class="hero">
+      <div class="container about-article">
+        <div class="poster">
+          <img
+            src="<%= `https://source.unsplash.com/random/30${Math.floor(Math.random()*15)}*30${Math.floor(Math.random()*9)}`  %>"
+          />
+        </div>
+        <div class="article-details">
+          <h3><%=article.title%></h3>
+          <% const time =new Date(article.createdAt).toLocaleString("gu-IN", {
+          hour: "numeric", minute: "numeric", hour12: true, }); const date = new
+          Date(article.createdAt); const d = date.getDate() ;const m =
+          date.getMonth();const y = date.getFullYear(); %>
+          <span>Posted on: </span><span><%= `${d}-${m}-${y} ${time}` %></span>
+          <p><%=article.body%></p>
+        </div>
+      </div>
+    </main>
   </body>
 </html>
