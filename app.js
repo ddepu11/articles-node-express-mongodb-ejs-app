@@ -56,10 +56,12 @@ app.get("/article/create", (req, res) => {
   res.render("articles/newArticle", { title: "New Article" });
 });
 
-app.get("/article/:id", async (req, res) => {
-  const id = req.params.id;
+app.get("/article/:id/:views", async (req, res) => {
+  const { id, views } = req.params;
+  // views is string remember that
+  let increaseViews = +views + 1;
   try {
-    const article = await get(id);
+    const article = await get(id, increaseViews);
     if (article) {
       res.render("articles/details", {
         article,

@@ -34,9 +34,9 @@ async function getAll() {
   }
 }
 
-async function get(id) {
+async function get(id, views) {
   try {
-    const article = await Article.findByIdAndUpdate(id);
+    const article = await Article.findByIdAndUpdate(id, { views });
     return article;
   } catch (error) {
     console.log(error);

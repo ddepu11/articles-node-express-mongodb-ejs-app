@@ -41,7 +41,7 @@
             minute: "numeric", hour12: true, }); const date = new
             Date(article.createdAt); const d = date.getDate() ;const m =
             date.getMonth();const y = date.getFullYear(); %>
-            <a href="/article/<%=article._id%>">
+            <a href="/article/<%=article._id%>/<%=article.views%>">
               <div class="r-article card" data-id="<%=article._id %>">
                 <button class="delete-btn" data-id="<%= article._id %> ">
                   Delete
