@@ -8,7 +8,6 @@ const { save, getAll, get, deleteOne } = require("./models/articleModel");
 const app = express();
 
 const PORT = process.env.PORT || 5000;
-const HOSTNAME = process.env.HOSTNAME || "localhost";
 
 const dbURI =
   "mongodb+srv://ddepu11:articles1234@cluster0.b4ktt.mongodb.net/article-database?retryWrites=true&w=majority";
@@ -23,7 +22,7 @@ async function connectToDB() {
       useCreateIndex: true,
     });
     console.log("Contected To DB");
-    app.listen(PORT, HOSTNAME, () => {
+    app.listen(PORT, () => {
       console.log(`Server is up and running on http://${HOSTNAME}:${PORT}`);
     });
   } catch (error) {
