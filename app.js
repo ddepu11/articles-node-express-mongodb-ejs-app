@@ -23,7 +23,7 @@ async function connectToDB() {
     });
     console.log("Contected To DB");
     app.listen(PORT, () => {
-      console.log(`Server is up and running on http://${HOSTNAME}:${PORT}`);
+      console.log(`Server is listing to port: ${PORT}`);
     });
   } catch (error) {
     console.log(error);
