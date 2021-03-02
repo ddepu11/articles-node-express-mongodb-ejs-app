@@ -5,7 +5,7 @@
     <%- include("../partials/nav.ejs")%>
 
     <main class="hero">
-      <div class="container">
+      <div class="container tobehide">
         <h2>Add a new article</h2>
         <span class="message"></span>
         <form>
@@ -15,6 +15,7 @@
               type="text"
               id="title"
               name="title"
+              class="create-input"
               placeholder="Title of your Article"
             />
             <span class="msg" id="titleMsg">msg</span>
@@ -26,6 +27,7 @@
               type="text"
               id="relatedTo"
               name="relatedTo"
+              class="create-input"
               placeholder="In One Word"
             />
             <span class="msg" id="relatedToMsg">msg</span>
@@ -42,5 +44,6 @@
       </div>
     </main>
     <script src="/js/newArticle.js"></script>
+    <script src="/js/index.js"></script>
   </body>
 </html>

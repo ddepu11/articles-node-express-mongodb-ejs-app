@@ -2,7 +2,7 @@ const form = document.querySelector("form"),
   titleEl = document.getElementById("title"),
   relatedToEl = document.getElementById("relatedTo"),
   bodyEl = document.getElementById("body"),
-  inputEl = document.querySelectorAll("input"),
+  createInputs = document.querySelectorAll(".create-input"),
   titleMsg = document.getElementById("titleMsg"),
   relatedToMsg = document.getElementById("relatedToMsg"),
   bodyMsg = document.getElementById("bodyMsg"),
@@ -81,7 +81,7 @@ function showMsg(msg, el, classToAdd = "error") {
 }
 
 // Remove error msg when you type
-inputEl.forEach((input) => {
+createInputs.forEach((input) => {
   input.addEventListener("input", (e) => {
     const id = input.id + "Msg";
     const span = document.getElementById(id);
