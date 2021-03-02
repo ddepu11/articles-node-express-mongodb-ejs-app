@@ -49,9 +49,22 @@ async function deleteOne(id) {
     console.log(error);
   }
 }
+async function search(keyword) {
+  try {
+    return await Article.find({
+      $or: [
+        { title: { $regex: `${keyword}`, $options: "gi" } },
+        { body: { $regex: `${keyword}`, $options: "gi" } },
+      ],
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
 module.exports = {
   save,
   getAll,
   get,
   deleteOne,
+  search,
 };

@@ -3,7 +3,14 @@ const fs = require("fs");
 const mongoose = require("mongoose");
 var bodyParser = require("body-parser");
 const fetch = require("node-fetch");
-const { save, getAll, get, deleteOne } = require("./models/articleModel");
+const morgan = require("morgan");
+const {
+  save,
+  getAll,
+  get,
+  deleteOne,
+  search,
+} = require("./models/articleModel");
 
 const app = express();
 
@@ -37,6 +44,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(morgan("dev"));
 
 app.get("/", async (req, res) => {
   try {
@@ -49,6 +57,23 @@ app.get("/", async (req, res) => {
     title: "Home",
     articles,
   });
+});
+
+app.get("/article/search/q=:keyword", async (req, res) => {
+  const { keyword } = req.params;
+
+  try {
+    const articles = await search(keyword.trim());
+    // console.log(articles);
+    if (articles) {
+      res.json({ ok: true, articles });
+    } else {
+      res.status(404).json({ ok: false });
+    }
+    // console.log(articles);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 app.get("/article/create", (req, res) => {
