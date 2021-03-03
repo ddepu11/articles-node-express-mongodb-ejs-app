@@ -331,9 +331,12 @@ button:focus {
 }
 
 @media (max-width: 562px) {
+  .nav-left {
+    transform: translateX(-13px);
+  }
   .nav-right {
     top: 26%;
-    left: 26%;
+    left: 25%;
   }
   .container h1 {
     font-size: 1.9em;
