@@ -326,14 +326,14 @@ button:focus {
     position: absolute;
     left: 15%;
     padding: 0;
-    width: 100%;
+    /* width: 100%; */
   }
 }
 
 @media (max-width: 562px) {
   .nav-right {
     top: 26%;
-    left: 28%;
+    left: 26%;
   }
   .container h1 {
     font-size: 1.9em;
