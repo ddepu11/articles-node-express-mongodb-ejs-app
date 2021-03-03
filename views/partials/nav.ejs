@@ -1,14 +1,13 @@
 <nav>
   <div class="container flex navbar">
-    <!-- LOgo and Links -->
-    <div class="nav-left">
-      <div class="nav-links">
-        <ul class="flex">
-          <li>
-            <a href="">
-              <img src="/logo.svg" alt="" />
-            </a>
-          </li>
+    <!-- Logo and Links -->
+    <div class="nav-left flex">
+      <a href="/" class="logo">
+        <img src="/logo.svg" alt="" />
+      </a>
+      <!-- Links -->
+      <div class="nav-links outer">
+        <ul class="flex inner">
           <li><a href="/">Home</a></li>
           <li><a href="">New</a></li>
           <li><a href="">Popular</a></li>
@@ -16,7 +15,9 @@
           <li><a href="/article/create">Add an article</a></li>
         </ul>
       </div>
+      <!-- *******************Links End************** -->
     </div>
+
     <!-- Search bar -->
     <div class="nav-right">
       <input
@@ -28,6 +29,9 @@
       <label for="search" id="search-btn">
         <i class="fas fa-search fa-2x"></i>
       </label>
+    </div>
+    <div class="menubar">
+      <i class="fas fa-bars fa-2x"></i>
     </div>
   </div>
 </nav>

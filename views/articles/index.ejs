@@ -22,9 +22,9 @@
                 src="<%= `https://source.unsplash.com/random/30${Math.floor(Math.random()*15)}*30${Math.floor(Math.random()*9)}`  %>"
               />
             </div>
-            <div class="info flex">
+            <div class="info">
               <div class="top">
-                <button href=""><%=as[i].relatedTo%></button>
+                <button><%=as[i].relatedTo%></button>
                 <% const time =new Date(as[i].createdAt).toLocaleString("gu-IN",
                 { hour: "numeric", minute: "numeric", hour12: true, }); const
                 date = new Date(as[i].createdAt); const d = date.getDate()
@@ -73,7 +73,6 @@
               <div class="r-article-info">
                 <a href="">Javascript</a>
                 <span>24-5-2021</span>
-
                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
               </div>
             </div> -->
