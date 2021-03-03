@@ -308,27 +308,45 @@ button:focus {
     align-items: flex-start;
   }
 
-  .nav-right {
-    display: none;
-  }
-
   .menubar {
     display: block;
     cursor: pointer;
     position: absolute;
-    right: 20px;
-    top: 22px;
+    right: 10px;
+    top: 18px;
   }
 
   .fa-bars {
     color: white;
   }
+  .navbar {
+    position: relative;
+  }
+  .nav-right {
+    position: absolute;
+    left: 15%;
+    padding: 0;
+    width: 100%;
+  }
 }
 
 @media (max-width: 562px) {
+  .nav-right {
+    top: 26%;
+    left: 28%;
+  }
   .container h1 {
     font-size: 1.9em;
     letter-spacing: 1px;
+  }
+  .nav-right input {
+    font-size: 0.8em;
+    padding: 7px 6px;
+    transform: translateY(-5px);
+    margin-right: 2px;
+  }
+  #search-btn i {
+    transform: scale(0.8);
   }
   .info p {
     font-size: 1.2em;
