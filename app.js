@@ -1,17 +1,9 @@
 const express = require("express");
-const fs = require("fs");
 const mongoose = require("mongoose");
 var bodyParser = require("body-parser");
-const fetch = require("node-fetch");
 const morgan = require("morgan");
-const {
-  save,
-  getAll,
-  get,
-  deleteOne,
-  search,
-} = require("./models/articleModel");
-
+const articleRoute = require("./routes/articleRoutes");
+const { AllBlogs } = require("./controllers/articleController");
 const app = express();
 
 const PORT = process.env.PORT || 5000;
@@ -42,84 +34,16 @@ app.set("view engine", "ejs");
 
 // Serve Static files
 app.use(express.static("public"));
+
+// For req.body
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+// Logger
 app.use(morgan("dev"));
 
-app.get("/", async (req, res) => {
-  try {
-    const articles = await getAll();
-  } catch (error) {
-    console.log(error);
-  }
+// @desc  Get all articles in index page
+// @route  GET /
+app.get("/", AllBlogs);
 
-  res.render("articles/index", {
-    title: "Home",
-    articles,
-  });
-});
-
-app.get("/article/search/q=:keyword", async (req, res) => {
-  const { keyword } = req.params;
-
-  try {
-    const articles = await search(keyword.trim());
-    // console.log(articles);
-    if (articles) {
-      res.json({ ok: true, articles });
-    } else {
-      res.status(404).json({ ok: false });
-    }
-    // console.log(articles);
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-app.get("/article/create", (req, res) => {
-  res.render("articles/newArticle", { title: "New Article" });
-});
-
-app.get("/article/:id/:views", async (req, res) => {
-  const { id, views } = req.params;
-  // views is string remember that
-  let increaseViews = +views + 1;
-  try {
-    const article = await get(id, increaseViews);
-    if (article) {
-      res.render("articles/details", {
-        article,
-        title: article.relatedTo,
-      });
-    }
-  } catch (error) {
-    console.log(error);
-  }
-});
-
-app.post("/article/create", async (req, res) => {
-  try {
-    const result = await save(req.body);
-    res.json({ ok: true, redirect: "/" });
-  } catch (error) {
-    res.json({ ok: false, msg: error._message });
-    console.log(error);
-  }
-});
-
-app.delete("/article/delete/:id", async (req, res) => {
-  const id = req.params.id.trim();
-
-  try {
-    const response = await deleteOne(id);
-
-    if (response) {
-      res.json({ ok: true, redirect: "/" });
-    } else {
-      res.json({ ok: false });
-    }
-  } catch (error) {
-    console.log(error);
-    res.statuc(404).json({ ok: false });
-  }
-});
+app.use("/article", articleRoute);
