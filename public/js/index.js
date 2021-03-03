@@ -2,7 +2,25 @@ const deleteBtn = document.querySelectorAll(".delete-btn");
 const search = document.getElementById("search");
 const searchBtn = document.getElementById("search-btn");
 const container = document.querySelector(".tobehide");
+const menu = document.querySelector(".menubar");
+const innerDiv = document.querySelector(".inner");
+const outerDiv = document.querySelector(".outer");
 
+//tav menu
+menu.addEventListener("click", () => {
+  const height = innerDiv.clientHeight;
+
+  if (outerDiv.clientHeight === 0) {
+    outerDiv.style.height = `${height}px`;
+  } else {
+    outerDiv.style.height = `0px`;
+  }
+  // if (outerDiv.clientHeight !== 0) {
+  //   outerDiv.style.height = `0px`;
+  // }
+});
+
+// Search by keyword
 searchBtn.addEventListener("click", async (e) => {
   e.preventDefault();
 
