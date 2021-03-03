@@ -86,7 +86,7 @@ button:focus {
 }
 .popular-articles {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(400px, auto));
+  grid-template-columns: repeat(auto-fit, minmax(200px, auto));
   grid-auto-rows: 350px;
   gap: 50px;
 }
@@ -272,6 +272,12 @@ button:focus {
   display: none;
 }
 /****************************___ Media Queries___********************** */
+@media (min-width: 980px) {
+  .outer {
+    height: auto !important;
+  }
+}
+
 /* For tablets */
 @media (max-width: 980px) {
   nav {
@@ -280,18 +286,22 @@ button:focus {
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
       rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   }
+
   .nav-left {
     flex-direction: column;
     align-items: flex-start;
     position: relative;
   }
+
   .nav-links ul {
     padding: 10px 0;
   }
+
   .nav-links ul li {
     padding-left: 10px;
     padding-bottom: 10px;
   }
+
   .outer {
     height: 0;
     overflow: hidden;
@@ -311,7 +321,7 @@ button:focus {
     display: block;
     cursor: pointer;
     position: absolute;
-    right: 22px;
+    right: 20px;
     top: 22px;
   }
 
